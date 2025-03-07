@@ -21,13 +21,13 @@ pipeline{
         }
         stage('DockerImageTag'){
             steps{
-                sh 'docker tag group-project:latest 529088290671.dkr.ecr.us-east-1.amazonaws.com/group-project:latest'
+                sh 'docker tag group-project:latest 529088290671.dkr.ecr.us-east-1.amazonaws.com/group-project:v1'
                 sh 'docker tag group-project:latest 529088290671.dkr.ecr.us-east-1.amazonaws.com/group-project:v1.$BUILD_NUMBER'
             }
         }
         stage('DockerPushImage'){
             steps{
-                sh 'docker push 529088290671.dkr.ecr.us-east-1.amazonaws.com/group-project:latest'
+                sh 'docker push 529088290671.dkr.ecr.us-east-1.amazonaws.com/group-project:v1'
                 sh 'docker push 529088290671.dkr.ecr.us-east-1.amazonaws.com/group-project:v1.$BUILD_NUMBER'
             }
         }
