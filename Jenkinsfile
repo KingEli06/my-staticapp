@@ -8,12 +8,6 @@ pipeline{
 
             }
         }
-        stage('build'){
-            steps{
-                sh 'ls'
-                sh 'touch eric.txt'
-
-            }
-        }
+        
     }
 }
