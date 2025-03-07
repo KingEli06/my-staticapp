@@ -1,11 +1,12 @@
 pipeline{
-    agent any 
+    agent any
     stages{
-        stage(checkout){
-        steps{
-          sh ''
-          sh ''
+        stage('CodeScan'){
+            steps{
+                sh 'trivy fs . -o file.txt'
+                sh 'cat file.txt'
+
+            }
         }
     }
-}
 }
