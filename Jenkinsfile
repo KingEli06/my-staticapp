@@ -8,12 +8,29 @@ pipeline{
 
             }
         }
-        stage('build'){
+        stage('DockerLogin'){
             steps{
-                sh 'ls'
-                sh 'touch eric.txt'
+                sh 'aws ecr get-login-password --region us-east-1 | 
+                docker login --username AWS --password-stdin 529088290671.dkr.ecr.us-east-1.amazonaws.com'
 
             }
         }
+        stage('DockerBuild'){
+            steps{
+                sh 'docker build -t group-project .'
+            }
+        }
+        stage('DockerImageTag'){
+            steps{
+                sh 'docker tag group-project:latest \
+                529088290671.dkr.ecr.us-east-1.amazonaws.com/group-project:latest'
+            }
+        }
+        stage('DockerPushImage'){
+            steps{
+                sh 'docker push 529088290671.dkr.ecr.us-east-1.amazonaws.com/group-project:latest'
+            }
+        }
+        
     }
 }
