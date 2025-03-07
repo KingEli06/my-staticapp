@@ -5,7 +5,6 @@ pipeline{
             steps{
                 sh 'trivy fs . -o file.txt'
                 sh 'cat file.txt'
-
             }
         }
         stage('DockerLogin'){
@@ -17,16 +16,19 @@ pipeline{
         stage('DockerBuild'){
             steps{
                 sh 'docker build -t group-project .'
+                sh 'docker build -t newversion .'
             }
         }
         stage('DockerImageTag'){
             steps{
                 sh 'docker tag group-project:latest 529088290671.dkr.ecr.us-east-1.amazonaws.com/group-project:latest'
+                sh 'docker tag group-project:latest 529088290671.dkr.ecr.us-east-1.amazonaws.com/group-project:v1.$BUILD_NUMBER'
             }
         }
         stage('DockerPushImage'){
             steps{
                 sh 'docker push 529088290671.dkr.ecr.us-east-1.amazonaws.com/group-project:latest'
+                sh 'docker push 529088290671.dkr.ecr.us-east-1.amazonaws.com/group-project:v1.$BUILD_NUMBER'
             }
         }
         
