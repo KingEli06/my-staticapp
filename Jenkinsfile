@@ -34,8 +34,9 @@ pipeline{
         }
         stage('Testing'){
             steps{
+                sh 'docker rm -f web web1 web2'
                 sh 'docker images'
-                sh 'docker run -itd --name web2 -p 80:80 group-project'
+                sh 'docker run -itd --name web3 -p 80:80 group-project'
                 sh 'docker ps'
             }
         }
