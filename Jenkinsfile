@@ -10,8 +10,7 @@ pipeline{
         }
         stage('DockerLogin'){
             steps{
-                sh 'aws ecr get-login-password --region us-east-1 | 
-                docker login --username AWS --password-stdin 529088290671.dkr.ecr.us-east-1.amazonaws.com'
+                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 529088290671.dkr.ecr.us-east-1.amazonaws.com'
 
             }
         }
@@ -22,8 +21,7 @@ pipeline{
         }
         stage('DockerImageTag'){
             steps{
-                sh 'docker tag group-project:latest \
-                529088290671.dkr.ecr.us-east-1.amazonaws.com/group-project:latest'
+                sh 'docker tag group-project:latest 529088290671.dkr.ecr.us-east-1.amazonaws.com/group-project:latest'
             }
         }
         stage('DockerPushImage'){
